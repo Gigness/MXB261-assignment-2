@@ -1,9 +1,14 @@
-function MSD = fence_random_walk( porosity_percentage )
+function [MSD, x, y, distance] = fence_random_walk( porosity_percentage )
 %FENCE_WALK Summary
 % Set parameters 
 walks = 1000;       % number of Walks
 steps = 750;         % number of steps
-S = 0;           % initialise sum for MSD     
+S = 0;           % initialise sum for MSD   
+distance = zeros(1, walks);
+x = zeros(1, walks);
+y = zeros(1, walks);
+origin = [100, 100];
+array_counter = 1;
 
 % Define directions that can be taken as an ordered pair which will be
 % added on
@@ -52,6 +57,13 @@ while walks > 0
     end
     
     if valid_walk
+        % variables for post processing analysis
+        distance(array_counter) = sqrt( (position(1) - origin(1))^2 + (position(2) - origin(2))^2 );
+        x(array_counter) = position(1);
+        y(array_counter) = position(2);
+        
+        array_counter = array_counter + 1;
+        
         % Sum the squared distances of each walk
         S = S + (position(1) - 100)^2 + (position(2) - 100)^2;
 
