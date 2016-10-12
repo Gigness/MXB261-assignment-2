@@ -117,5 +117,47 @@ histogram(y_rand_obstacle(4, :));
 title('y position')
 axis([80, 120, 0, 400]);
 
+%% 2d - Final positions
+% Fence scenario
+figure()
+subplot(2, 2, 1);
+plot(x_fence_obstacle(1, :), y_fence_obstacle(1, :), 'b.', 'MarkerSize', 10);
+title({'Fence Scenario: Final Positions'; '10% porosity'});
+axis([0, 200, 0, 200]);
 
+subplot(2, 2, 2);
+plot(x_fence_obstacle(2, :), y_fence_obstacle(1, :), 'b.', 'MarkerSize', 10);
+title({'Fence Scenario: Final Positions'; '20% porosity'});
+axis([0, 200, 0, 200]);
 
+subplot(2, 2, 3);
+plot(x_fence_obstacle(3, :), y_fence_obstacle(1, :), 'b.', 'MarkerSize', 10);
+title({'Fence Scenario: Final Positions'; '30% porosity'});
+axis([0, 200, 0, 200]);
+
+subplot(2, 2, 4);
+plot(x_fence_obstacle(4, :), y_fence_obstacle(1, :), 'b.', 'MarkerSize', 10);
+title({'Fence Scenario: Final Positions'; '40% porosity'});
+axis([0, 200, 0, 200]);
+
+% Random obstacle scenario
+figure()
+subplot(2, 2, 1);
+plot(x_rand_obstacle(1, :), y_rand_obstacle(1, :), 'b.', 'MarkerSize', 10);
+title({'Fence Scenario: Final Positions'; '10% porosity'});
+axis([0, 200, 0, 200]);
+
+subplot(2, 2, 2);
+plot(x_rand_obstacle(2, :), y_rand_obstacle(1, :), 'b.', 'MarkerSize', 10);
+title({'Fence Scenario: Final Positions'; '20% porosity'});
+axis([0, 200, 0, 200]);
+
+subplot(2, 2, 3);
+plot(x_rand_obstacle(3, :), y_rand_obstacle(1, :), 'b.', 'MarkerSize', 10);
+title({'Fence Scenario: Final Positions'; '30% porosity'});
+axis([0, 200, 0, 200]);
+
+subplot(2, 2, 4);
+plot(x_rand_obstacle(4, :), y_rand_obstacle(1, :), 'b.', 'MarkerSize', 10);
+title({'Fence Scenario: Final Positions'; '40% porosity'});
+axis([0, 200, 0, 200]);
