@@ -1,6 +1,6 @@
 %% MXB261 - Assignment 2
 
-%% MXB261 - Question 2: 2-D Random Walks
+%% Question 2: 2-D Random Walks
 
 porosity = [0.1, 0.2, 0.3, 0.4];
 MSD_fences = zeros(1, length(porosity));
@@ -161,3 +161,18 @@ subplot(2, 2, 4);
 plot(x_rand_obstacle(4, :), y_rand_obstacle(1, :), 'b.', 'MarkerSize', 10);
 title({'Fence Scenario: Final Positions'; '40% porosity'});
 axis([0, 200, 0, 200]);
+
+%% Question 3: Population growth of a parasite
+%% Q3a
+k1 = 0.1;
+k2 = 0.9;
+k3 = 0.9;
+k4 = 0.1;
+k5 = 0.1;
+tspan = [0, 80]; 
+
+x0 = [20, 20]';
+[t, x] = ode45(@(t, x) predator_prey_fn(t, x, k1, k2, k3, k4, k5), tspan, x0); 
+plot(t, x(:, 1)); hold on; plot(t, x(:, 2)); hold off;
+legend('parasite', 'host');
+
