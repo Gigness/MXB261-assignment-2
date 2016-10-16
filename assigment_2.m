@@ -118,7 +118,7 @@ title('y position')
 axis([80, 120, 0, 400]);
 
 %% 2d - Final positions
-% Fence scenario
+%% Fence scenario
 figure()
 subplot(2, 2, 1);
 plot(x_fence_obstacle(1, :), y_fence_obstacle(1, :), 'b.', 'MarkerSize', 10);
@@ -140,7 +140,7 @@ plot(x_fence_obstacle(4, :), y_fence_obstacle(1, :), 'b.', 'MarkerSize', 10);
 title({'Fence Scenario: Final Positions'; '40% porosity'});
 axis([0, 200, 0, 200]);
 
-% Random obstacle scenario
+%% Random obstacle scenario
 figure()
 subplot(2, 2, 1);
 plot(x_rand_obstacle(1, :), y_rand_obstacle(1, :), 'b.', 'MarkerSize', 10);
@@ -164,7 +164,7 @@ axis([0, 200, 0, 200]);
 
 %% Question 3: Population growth of a parasite
 %% Q3a
-k1 = 0.1;
+k1 = 0.01;
 k2 = 0.9;
 k3 = 0.9;
 k4 = 0.1;
@@ -175,4 +175,13 @@ x0 = [20, 20]';
 [t, x] = ode45(@(t, x) predator_prey_fn(t, x, k1, k2, k3, k4, k5), tspan, x0); 
 plot(t, x(:, 1)); hold on; plot(t, x(:, 2)); hold off;
 legend('parasite', 'host');
+
+%% Test set up of masks
+grid_width = 200;
+food_parasite_mask = food_parasite_random_placement(0.1, grid_width);
+
+%%
+
+grid_with = 200;
+food_parasite_local_mask = localised_food_random_parasite_placement(0.4, grid_width, 15);
 
