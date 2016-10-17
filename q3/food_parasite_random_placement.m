@@ -1,10 +1,13 @@
-function mask = food_parasite_random_placement(density, grid_width)
+function [mask, parasites_x, parasites_y, parasites_age] = food_parasite_random_placement(density, grid_width)
 % food_spatial_mask
 % creates food at random locations in a 200 by 200 grid
 
 population = density * grid_width^2;
-mask = ones(grid_width, grid_width);
-
+% parasite locations in matrix
+mask = ones(grid_width, grid_width); 
+parasites_x = zeros(1, population);
+parasites_y = zeros(1, population);
+parasites_age = zeros(1, population);
 
 % populate food (as 0.5)
 for i = 1:population
@@ -31,7 +34,8 @@ for j = 1:population
         y = randi([1 200]);
     end
     mask(y, x) = 0;
-    
+    parasites_x(j) = x;
+    parasites_y(j) = y;
 end
 
 

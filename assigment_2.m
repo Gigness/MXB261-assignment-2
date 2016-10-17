@@ -176,12 +176,65 @@ x0 = [20, 20]';
 plot(t, x(:, 1)); hold on; plot(t, x(:, 2)); hold off;
 legend('parasite', 'host');
 
-%% Test set up of masks
+%% Q3b stochastic model
+%% simulation properties
+steps = 100000;
 grid_width = 200;
-food_parasite_mask = food_parasite_random_placement(0.1, grid_width);
+[food_para_mask, x_pos, y_pos, age] = food_parasite_random_placement(0.01, grid_width);
+parasite_max_age = 50;
+%% Simulation
+for step = 1:steps
+    
+    num_parasites = length(x_pos);
+    for p = 1:num_parasites
+        
+        % current parasite position
+        old_x = x_pos(p);
+        old_y = y_pos(p);
+        
+        % parasite has reached peak age - delete it
+        if age(p) == parasite_max_age
+            x_pos(p) = [];
+            y_pos(p) = [];
+            age(p) = [];
+            food_para_mask(old_y, old_x) = 1;
+        
+        % check if off grid - do nothing if off grid
+        elseif new_x >= 1 && new_x <= 200 && new_y >= 1 && new_y <= 200
 
-%%
+            [dx, dy] = random_movement();
 
-grid_with = 200;
-food_parasite_local_mask = localised_food_random_parasite_placement(0.4, grid_width, 15);
+            new_x = old_x + dx;
+            new_y = old_y + dy;
+            
+            % collision with food
+            if food_para_mask(new_y, new_x) == 0.5
+                
+                % add parasite to mask at new position
+                % leave parasite existing at initial position
+                food_para_mask(new_y, new_x) = 0;
+                
+                % update parasite's position
+                x_pos(p) = new_x;
+                y_pos(p) = new_y;
+                
+                % add new parasite's position and age to vectors
+                x_pos(end + 1) = old_x;
+                y_pos(end + 1) = old_y;
+                age(end + 1) = 0;
+            
+            % empty space
+            else
+                x_pos(p) = new_x;
+                y_pos(p) = new_y;   
+                % update mask
+                food_para_mask(old_y, old_x) = 1;
+                food_para_mask(new_y, new_x) = 0;
+            end
+        end
+        
+    end
+
+end
+
 
