@@ -1,4 +1,4 @@
-function [mask, parasites_x, parasites_y, parasites_age] = localised_food_random_parasite_placement(density, grid_width, std_dev)
+function [mask, parasites, food] = localised_food_random_parasite_placement(density, grid_width, std_dev)
 % LOCALISED_FOOD_RANDOM_PARASITE_PLACEMENT
 %
 % four regions of localised food
@@ -21,16 +21,15 @@ pop_per_region = population / num_regions;
 % food and parasite mask
 mask = ones(grid_width, grid_width);
 
-% parasite location and age vectors
-parasites_x = zeros(1, population);
-parasites_y = zeros(1, population);
-parasites_age = zeros(1, population);
+parasites = zeros(population, 3);
+food = zeros(population, 2);
+
 
 % localised region starting coordinates
 dist_from_origin = grid_width / num_regions;
 x_origins = [dist_from_origin * 1, dist_from_origin * 3, dist_from_origin * 1, dist_from_origin * 3];
 y_origins = [dist_from_origin * 1, dist_from_origin * 3, dist_from_origin * 3, dist_from_origin * 1];
-
+food_index_counter = 1;
 for i = 1:num_regions
     x_origin = x_origins(i);
     y_origin = y_origins(i);
@@ -57,6 +56,8 @@ for i = 1:num_regions
         
         end
         mask(y, x) = 0.5;
+        food_index_counter = food_index_counter + 1;
+        food(food_index_counter, :) = [x, y];
     end
 end
 
@@ -69,8 +70,7 @@ for k = 1:population
         y = randi([1 200]);
     end
     mask(y, x) = 0;
-    parasites_x(k) = x;
-    parasites_y(k) = y;
+    parasites(k, 1:2) = [x, y];
 end 
 
 end

@@ -177,29 +177,29 @@ plot(t, x(:, 1)); hold on; plot(t, x(:, 2)); hold off;
 legend('parasite', 'host');
 
 %% Q3b stochastic model
-%% simulation properties
+%% simulation properties random placement of food
 steps = 100000;
 grid_width = 200;
-[food_para_mask, x_pos, y_pos, age] = food_parasite_random_placement(0.01, grid_width);
-parasite_max_age = 50;
+[food_para_mask, parasites, food] = food_parasite_random_placement(0.01, grid_width);
+parasite_max_age = 100000;
+
+
 %% Simulation
 for step = 1:steps
     
-    num_parasites = length(x_pos);
+    num_parasites = length(parasites);
+    
     for p = 1:num_parasites
         
-        % current parasite position
-        old_x = x_pos(p);
-        old_y = y_pos(p);
+        old_x = parasites(p, 1:1);
+        old_y = parasites(p, 2:2);
         
         % parasite has reached peak age - delete it
-        if age(p) == parasite_max_age
-            x_pos(p) = [];
-            y_pos(p) = [];
-            age(p) = [];
+        if parasites(p, 3:3) == parasite_max_age + 1
+            parasites(p, :) = [];
             food_para_mask(old_y, old_x) = 1;
         
-        % check if off grid - do nothing if off grid
+        % parasite has valid new position
         elseif new_x >= 1 && new_x <= 200 && new_y >= 1 && new_y <= 200
 
             [dx, dy] = random_movement();
@@ -215,18 +215,14 @@ for step = 1:steps
                 food_para_mask(new_y, new_x) = 0;
                 
                 % update parasite's position
-                x_pos(p) = new_x;
-                y_pos(p) = new_y;
+                parasites(p, 1:2) = [new_x, new_y];
                 
-                % add new parasite's position and age to vectors
-                x_pos(end + 1) = old_x;
-                y_pos(end + 1) = old_y;
-                age(end + 1) = 0;
+                % add new parasite's position and age to vector
+                parasites(end + 1, :) = [old_x, old_y, 0];
             
             % empty space
-            else
-                x_pos(p) = new_x;
-                y_pos(p) = new_y;   
+            elseif food_para_mask(new_y, new_x) == 1
+                parasites(p, 1:2) = [new_x, new_y];   
                 % update mask
                 food_para_mask(old_y, old_x) = 1;
                 food_para_mask(new_y, new_x) = 0;
