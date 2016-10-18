@@ -334,7 +334,7 @@ for step = 1:steps
     % age parasites
     parasites(:, 3) = parasites(:, 3) + 1;
 
-    % Food generation
+    % Food generation at neighbouring cells
     for f = 1:num_food
         if food(f, 1) ~= -1
             
@@ -377,6 +377,106 @@ for step = 1:steps
     end
     
     
+    plot(parasites(:, 1), parasites(:, 2), 'r.', 'MarkerSize', 10);
+    hold on;
+    plot(food(:, 1), food(:, 2), 'b.', 'MarkerSize', 10);
+    hold off;
+    axis([1 grid_width 1 grid_width]);
+    frame = getframe(gcf);
+    writeVideo(video_writer, frame);
+    
+end
+
+close(video_writer);
+
+%% Scenario 2: Random placement of constant amount of food
+steps = 1000;
+grid_width = 200;
+[food_para_mask, parasites, food] = food_parasite_random_placement(0.01, grid_width);
+parasite_max_age = 100;
+M = zeros(1, steps);
+video_writer = VideoWriter('test.avi');
+open(video_writer);
+
+num_new_food_cells = 30;
+
+
+f_id = figure;
+axis([1 grid_width 1 grid_width]);
+
+for step = 1:steps
+    figure(f_id);
+    num_parasites = length(parasites);
+    num_food = length(food);
+    
+    % Parasite movement
+    for p = 1:num_parasites
+        
+        % check if it is dead
+        if parasites(p, 1) ~= -1
+        
+            old_x = parasites(p, 1:1);
+            old_y = parasites(p, 2:2);
+
+            [dx, dy] = random_movement();
+            new_x = old_x + dx;
+            new_y = old_y + dy;
+
+            % parasite has reached peak age - delete it
+            if parasites(p, 3:3) == parasite_max_age + 1
+                parasites(p, 1:2) = [-1 -1];
+                food_para_mask(old_y, old_x) = 1;
+
+            % parasite has valid new position
+            elseif new_x >= 1 && new_x <= 200 && new_y >= 1 && new_y <= 200
+
+                % collision with food
+                if food_para_mask(new_y, new_x) == 0.5
+
+                    % add parasite to mask at new position
+                    % leave parasite existing at initial position
+                    food_para_mask(new_y, new_x) = 0;
+
+                    % delete the food
+                    % find the food at new_y, new_x
+                    food_index = find(ismember(food,[new_x new_y], 'rows'));
+
+                    % delete the food
+                    food(food_index, :) = [-1 -1];
+
+                    % update parasite's position
+                    parasites(p, 1:2) = [new_x, new_y];
+
+                    % add new parasite's position and age to vector
+                    parasites(end + 1, :) = [old_x, old_y, 0];
+
+                % empty space
+                elseif food_para_mask(new_y, new_x) == 1
+                    parasites(p, 1:2) = [new_x, new_y];   
+                    % update mask
+                    food_para_mask(old_y, old_x) = 1;
+                    food_para_mask(new_y, new_x) = 0;
+                end
+            end    
+        end
+    end
+    
+    % age parasites
+    parasites(:, 3) = parasites(:, 3) + 1;
+
+    % Food generation at neighbouring cells
+    for g = 1:num_new_food_cells
+        x = randi([1 200]);
+        y = randi([1 200]);
+        while food_para_mask(y, x) == 0.5 || food_para_mask(y, x) == 0
+            x = randi([1 200]);
+            y = randi([1 200]); 
+        end
+
+        food_para_mask(y, x) = 0.5;
+        food(end + 1, :) = [x y];
+    end
+
     plot(parasites(:, 1), parasites(:, 2), 'r.', 'MarkerSize', 10);
     hold on;
     plot(food(:, 1), food(:, 2), 'b.', 'MarkerSize', 10);
