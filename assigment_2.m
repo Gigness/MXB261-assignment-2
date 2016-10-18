@@ -339,6 +339,9 @@ for step = 1:steps
         if food(f, 1) ~= -1
             
             if rand < food_creation_threshold
+                
+                u = rand;
+                
                 x_pos = food(f, 1);
                 y_pos = food(f, 2);
                 
@@ -347,19 +350,27 @@ for step = 1:steps
                 y_pos_up = y_pos + 1;
                 y_pos_down = y_pos - 1;
                 
-                % reproduce to the right
-                if food_para_mask(y_pos, x_pos_right) ~= 0 && food_para_mask(y_pos, x_pos_right) ~= 0.5 && x_pos_right <= grid_width
-                    food_para_mask(y_pos, x_pos_right) = 0.5;
-                    food_para_mask(end + 1, :) = [x_pos_right, y_pos];
-                elseif food_para_mask(y_pos, x_pos_left) ~= 0 && food_para_mask(y_pos, x_pos_left) ~= 0.5 && x_pos_left >= 1
-                    food_para_mask(y_pos, x_pos_left) = 0.5;
-                    food_para_mask(end + 1, :) = [x_pos_left, y_pos];
-                elseif food_para_mask(y_pos_up, x_pos) ~= 0 && food_para_mask(y_pos_up, x_pos) ~= 0.5 && y_pos_up <= grid_width
-                    food_para_mask(y_pos_up, x_pos) = 0.5;
-                    food_para_mask(end + 1, :) = [x_pos, y_pos_up];
-                elseif food_para_mask(y_pos_down, x_pos) ~= 0 && food_para_mask(y_pos_down, x_pos) ~= 0.5 && y_pos_down >= 1
-                    food_para_mask(y_pos_down, x_pos) = 0.5;
-                    food_para_mask(end + 1, :) = [x_pos, y_pos_down];
+                if u <= 0.25 && x_pos_right <= grid_width
+                    % reproduce to the right
+                    if food_para_mask(y_pos, x_pos_right) ~= 0 && food_para_mask(y_pos, x_pos_right) ~= 0.5
+                        food_para_mask(y_pos, x_pos_right) = 0.5;
+                        food(end + 1, :) = [x_pos_right, y_pos];
+                    end
+                elseif u <= 0.5 && x_pos_left >= 1
+                    if food_para_mask(y_pos, x_pos_left) ~= 0 && food_para_mask(y_pos, x_pos_left) ~= 0.5
+                        food_para_mask(y_pos, x_pos_left) = 0.5;
+                        food(end + 1, :) = [x_pos_left, y_pos];
+                    end
+                elseif u <= 0.75 && y_pos_up <= grid_width
+                    if food_para_mask(y_pos_up, x_pos) ~= 0 && food_para_mask(y_pos_up, x_pos) ~= 0.5
+                        food_para_mask(y_pos_up, x_pos) = 0.5;
+                        food(end + 1, :) = [x_pos, y_pos_up];
+                    end
+                elseif y_pos_down >= 1
+                    if food_para_mask(y_pos_down, x_pos) ~= 0 && food_para_mask(y_pos_down, x_pos) ~= 0.5
+                        food_para_mask(y_pos_down, x_pos) = 0.5;
+                        food(end + 1, :) = [x_pos, y_pos_down];
+                    end
                 end
             end
         end 
