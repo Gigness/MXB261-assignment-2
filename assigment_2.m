@@ -180,17 +180,15 @@ legend('parasite', 'host');
 %% simulation properties random placement of food
 steps = 2500;
 grid_width = 200;
-[food_para_mask, parasites, food] = food_parasite_random_placement(0.1, grid_width);
-[food_para_mask1, parasites1, food1] = localised_food_random_parasite_placement(0.2, grid_width, 20);
+[food_para_mask, parasites, food] = food_parasite_random_placement(0.01, grid_width);
+[food_para_mask1, parasites1, food1] = localised_food_random_parasite_placement(0.01, grid_width, 20);
 parasite_max_age = 500;
-M = zeros(1, steps);
-video_writer = VideoWriter('test.avi');
-open(video_writer);
+
 
 %%
-plot(parasites(:, 1:1), parasites(:, 2:2), 'r.', 'MarkerSize', 5);
+plot(parasites1(:, 1:1), parasites1(:, 2:2), 'r.', 'MarkerSize', 10);
 hold on;
-plot(food(:, 1:1), food(:, 2:2), 'b.', 'MarkerSize', 5)
+plot(food1(:, 1:1), food1(:, 2:2), 'b.', 'MarkerSize', 10)
 hold off;
 
 

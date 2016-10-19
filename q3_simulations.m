@@ -55,7 +55,7 @@ steps = 500;
 parasite_max_age = 100;
 food_creation_threshold = 0.05;
 food_death_threshold = 0.02;
-file_name = 'case1_simulation.avi';
+file_name = 'case4_simulation.avi';
 
 simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name)
 

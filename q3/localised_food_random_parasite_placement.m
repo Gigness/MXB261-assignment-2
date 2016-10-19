@@ -56,8 +56,8 @@ for i = 1:num_regions
         
         end
         mask(y, x) = 0.5;
-        food_index_counter = food_index_counter + 1;
         food(food_index_counter, :) = [x, y];
+        food_index_counter = food_index_counter + 1;
     end
 end
 
