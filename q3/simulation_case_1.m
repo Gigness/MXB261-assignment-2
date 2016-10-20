@@ -114,8 +114,8 @@ for step = 1:steps
                 end
             end
             if rand < food_death_threshold
-                x_pos = food(f, 1)
-                y_pos = food(f, 2)
+                x_pos = food(f, 1);
+                y_pos = food(f, 2);
                 
                 food(f, :) = [-1 -1];
                 mask(y_pos, x_pos) = 1;
