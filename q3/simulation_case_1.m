@@ -126,7 +126,7 @@ for step = 1:steps
         end 
     end
     
-    if make_video && mod(step, 2) == 0
+    if make_video && mod(step, 5) == 0
         plot(parasites(:, 1), parasites(:, 2), 'r.', 'MarkerSize', 10);
         hold on;
         plot(food(:, 1), food(:, 2), 'b.', 'MarkerSize', 10);
