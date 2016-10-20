@@ -1,5 +1,6 @@
 %% Case 1: Random F and P placements with Food created in neighbouring cells
 
+make_video = true;
 grid_width = 200;
 density = 0.1;
 [mask, parasites, food] = food_parasite_random_placement(density, grid_width);
@@ -9,7 +10,7 @@ food_creation_threshold = 0.05;
 food_death_threshold = 0.02;
 file_name = 'case1_simulation.avi';
 
-simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name)
+[p1, f1] = simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name, make_video);
 
 %% Results
 % Food dies out from parasites
@@ -26,7 +27,7 @@ food_creation_threshold = 0.45;
 food_death_threshold = 0.02;
 file_name = 'case2_simulation.avi';
 
-simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name)
+simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name, make_video)
 %% Results
 % Equilibrium is reached, althought only 1000 steps are run.
 
@@ -41,7 +42,7 @@ food_creation_threshold = 0.05;
 food_death_threshold = 0.02;
 file_name = 'case3_simulation.avi';
 
-simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name)
+simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name, make_video)
 
 %% Results
 % Food lives
@@ -57,7 +58,7 @@ food_creation_threshold = 0.05;
 food_death_threshold = 0.02;
 file_name = 'case4_simulation.avi';
 
-simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name)
+simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name, make_video)
 
 %% Results
 % Food becomes extinct followed by parasites going extinct
@@ -72,7 +73,7 @@ food_creation_threshold = 0.08;
 food_death_threshold = 0.02;
 file_name = 'case5_simulation.avi';
 
-simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name)
+simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name, make_video)
 %% Results
 % Parasites become extinct
 % Food lives on
@@ -87,7 +88,7 @@ food_creation_threshold = 0.50;
 food_death_threshold = 0.02;
 file_name = 'case6_simulation.avi';
 
-simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name)
+simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name, make_video)
 %% Results
 % Equilibrium
 

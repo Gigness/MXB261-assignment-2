@@ -1,13 +1,14 @@
-function [  ] = simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name)
+function [pop_parasites, pop_food] = simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name, make_video)
 % Simulation Case 1: Food is reproduced in neighbouring cells
 
 
 % video writer
 video_writer = VideoWriter(file_name);
 open(video_writer);
-make_video = true;
 
-% paramters
+% population counts
+pop_parasites = zeros(1, steps);
+pop_food = zeros(1, steps);
 
 % plot
 if make_video
@@ -123,7 +124,7 @@ for step = 1:steps
         end 
     end
     
-    if make_video
+    if make_video && mod(step, 5) == 0
         plot(parasites(:, 1), parasites(:, 2), 'r.', 'MarkerSize', 10);
         hold on;
         plot(food(:, 1), food(:, 2), 'b.', 'MarkerSize', 10);
@@ -133,9 +134,19 @@ for step = 1:steps
         writeVideo(video_writer, frame);
     end
     
+    mask_parasites = parasites(:, 1) ~= -1;
+    mask_food = food(:, 1) ~= -1;
+    
+    total_p = sum(mask_parasites);
+    total_f = sum(mask_food);
+    
+    pop_parasites(step) = total_p;
+    pop_food(step) = total_f;
 end
 
-close(video_writer);
+if make_video
+    close(video_writer);
+end
 
 end
 
