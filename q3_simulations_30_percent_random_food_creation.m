@@ -61,7 +61,7 @@ food_creation_num = 50;
 food_death_threshold = 0.02;
 file_name = 'case33_simulation.avi';
 
-[p33, f3] = simulation_case_2(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_num, food_death_threshold, file_name, make_video);
+[p33, f33] = simulation_case_2(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_num, food_death_threshold, file_name, make_video);
 
 %% Results
 % Equilibrium
@@ -71,13 +71,14 @@ grid_width = 200;
 density = 0.3;
 [mask, parasites, food] = localised_food_random_parasite_placement(density, grid_width, 10);
 steps = 500;
-parasite_max_age = 10;
+parasite_max_age = 50;
 food_creation_num = 50;
 food_death_threshold = 0.02;
 file_name = 'case34_simulation.avi';
 
 [p34, f34] = simulation_case_2(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_num, food_death_threshold, file_name, make_video);
 %% Results
-% Parasites become extinct
-% Food lives on
+% Food - Extinct
+% Parasites - Live
+% Not possible due to random creation of set amount of Food
 
