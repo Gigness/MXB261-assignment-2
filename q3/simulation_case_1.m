@@ -18,8 +18,7 @@ end
 
 for step = 1:steps
     figure(f_id);
-    num_parasites = length(parasites);
-    num_food = length(food);
+    num_parasites = size(parasites, 1);
     
     % Parasite movement
     for p = 1:num_parasites
@@ -76,8 +75,11 @@ for step = 1:steps
     % age parasites
     parasites(:, 3) = parasites(:, 3) + 1;
 
+    num_food = size(food, 1);
+
     % Food generation at neighbouring cells
     for f = 1:num_food
+        
         if food(f, 1) ~= -1
             if rand < food_creation_threshold
                 
@@ -124,7 +126,7 @@ for step = 1:steps
         end 
     end
     
-    if make_video && mod(step, 5) == 0
+    if make_video && mod(step, 2) == 0
         plot(parasites(:, 1), parasites(:, 2), 'r.', 'MarkerSize', 10);
         hold on;
         plot(food(:, 1), food(:, 2), 'b.', 'MarkerSize', 10);
@@ -134,14 +136,24 @@ for step = 1:steps
         writeVideo(video_writer, frame);
     end
     
-    mask_parasites = parasites(:, 1) ~= -1;
-    mask_food = food(:, 1) ~= -1;
+    % reallocate matrices
+%     if mod(step, 2) == 0
+    mask_of_live_parasites = parasites(:, 1) ~= -1;
+    parasites = parasites(mask_of_live_parasites, :);
+
+    mask_of_live_food = food(:, 1) ~= -1;
+    food = food(mask_of_live_food, :);
+         
+%     end
     
-    total_p = sum(mask_parasites);
-    total_f = sum(mask_food);
-    
-    pop_parasites(step) = total_p;
-    pop_food(step) = total_f;
+%     mask_parasites = parasites(:, 1) ~= -1;
+%     mask_food = food(:, 1) ~= -1;
+%     
+%     total_p = sum(mask_parasites);
+%     total_f = sum(mask_food);
+%     
+    pop_parasites(step) = length(parasites);
+    pop_food(step) = length(food);
 end
 
 if make_video

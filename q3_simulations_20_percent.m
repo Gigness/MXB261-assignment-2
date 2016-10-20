@@ -1,14 +1,14 @@
-%% Case 1: Random F and P placements with Food created in neighbouring cells
+%% Case 7: Random F and P placements with Food created in neighbouring cells
 
 make_video = true;
 grid_width = 200;
-density = 0.1;
+density = 0.2;
 [mask, parasites, food] = food_parasite_random_placement(density, grid_width);
 steps = 500;
-parasite_max_age = 100;
+parasite_max_age = 40;
 food_creation_threshold = 0.05;
 food_death_threshold = 0.02;
-file_name = 'case1_simulation.avi';
+file_name = 'case7_simulation.avi';
 
 [p1, f1] = simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name, make_video);
 
@@ -19,13 +19,13 @@ file_name = 'case1_simulation.avi';
 %% Case 2: Random F and P placements with Food created in neighbouring cells
 
 grid_width = 200;
-density = 0.1;
+density = 0.2;
 [mask, parasites, food] = food_parasite_random_placement(density, grid_width);
-steps = 1000;
-parasite_max_age = 20;
-food_creation_threshold = 0.45;
-food_death_threshold = 0.02;
-file_name = 'case2_simulation.avi';
+steps = 750;
+parasite_max_age = 15;
+food_creation_threshold = 0.70;
+food_death_threshold = 0.05;
+file_name = 'case8_simulation.avi';
 
 [p2, f2] = simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name, make_video);
 %% Results
@@ -33,16 +33,17 @@ file_name = 'case2_simulation.avi';
 
 %% Case 3: Random F and P placements with Food created in neighbouring cells
 
+make_video = true;
 grid_width = 200;
 density = 0.1;
 [mask, parasites, food] = food_parasite_random_placement(density, grid_width);
 steps = 500;
-parasite_max_age = 20;
-food_creation_threshold = 0.05;
-food_death_threshold = 0.02;
-file_name = 'case3_simulation.avi';
+parasite_max_age = 15;
+food_creation_threshold = 0.40;
+food_death_threshold = 0.05;
+file_name = 'case9_simulation.avi';
 
-simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name, make_video)
+[p3, f3] =simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name, make_video);
 
 %% Results
 % Food lives
@@ -56,7 +57,7 @@ steps = 500;
 parasite_max_age = 100;
 food_creation_threshold = 0.05;
 food_death_threshold = 0.02;
-file_name = 'case4_simulation.avi';
+file_name = 'case10_simulation.avi';
 
 simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name, make_video)
 
@@ -71,7 +72,7 @@ steps = 500;
 parasite_max_age = 30;
 food_creation_threshold = 0.08;
 food_death_threshold = 0.02;
-file_name = 'case5_simulation.avi';
+file_name = 'cas11_simulation.avi';
 
 simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name, make_video)
 %% Results
@@ -86,7 +87,7 @@ steps = 500;
 parasite_max_age = 20;
 food_creation_threshold = 0.50;
 food_death_threshold = 0.02;
-file_name = 'case6_simulation.avi';
+file_name = 'case12_simulation.avi';
 
 simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name, make_video)
 %% Results
