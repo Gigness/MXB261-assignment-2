@@ -32,7 +32,13 @@ file_name = 'case31_simulation.avi';
 
 %% Results
 % Equilibrium
-
+t = 1:1:size(p31, 2);
+figure;
+plot(t, p31, 'r.');
+hold on
+plot(t, f31, 'b.');
+legend('parasites', 'food');
+title({'Random Food with Parasite Placement at 20%'; 'Localised Food Reproduction'});
 %% Case 32: Random F and P placements with Food created in neighbouring cells
 
 make_video = true;
@@ -65,6 +71,13 @@ file_name = 'case33_simulation.avi';
 
 %% Results
 % Equilibrium
+t = 1:1:size(p33, 2);
+figure;
+plot(t, p33, 'r.');
+hold on
+plot(t, f33, 'b.');
+legend('parasites', 'food');
+title({'Random Food with Parasite Placement at 20%'; 'Localised Food Reproduction'});
 
 %% Case 34: Localised F placements with Food reproduced in neighbouring cells
 grid_width = 200;

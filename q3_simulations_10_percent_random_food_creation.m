@@ -13,9 +13,9 @@ file_name = 'case13_simulation.avi';
 [p13, f13] = simulation_case_2(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_num, food_death_threshold, file_name, make_video);
 
 %% Results
-% Food dies out from parasites
-% But f3 food elements are always created at each iteration so they never
-% go extinct
+% Food - Can never go Extinct
+% Parasites - Nearly Go extinct
+
 
 %% Case 14: Random F and P placements with Food created in random locations
 
@@ -32,7 +32,14 @@ file_name = 'case14_simulation.avi';
 [p14, f14] = simulation_case_2(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_num, food_death_threshold, file_name, make_video);
 
 %% Results
-% Equilibrium is reached, althought only 1000 steps are run.
+% Equilibrium
+t = 1:1:steps;
+figure;
+plot(t, p14, 'r.');
+hold on
+plot(t, f14, 'b.');
+legend('parasites', 'food');
+title({'Random Food with Parasite Placement at 10%'; 'Random Food Reproduction'});
 
 %% Case 15: Random F and P placements with Food created in neighbouring cells
 
@@ -80,8 +87,8 @@ file_name = 'case17_simulation.avi';
 
 [p17, f17] = simulation_case_2(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_num, food_death_threshold, file_name, make_video);
 %% Results
-% Parasites become extinct
-% Food lives on
+% Food - Lives
+% Parasites - Extinct
 
 %% Case 18: Localised F placements with Food reproduced in neighbouring cells
 grid_width = 200;
@@ -96,4 +103,11 @@ file_name = 'case18_simulation.avi';
 [p18, f18] = simulation_case_2(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_num, food_death_threshold, file_name, make_video);
 %% Results
 % Equilibrium
+t = 1:1:steps;
+figure;
+plot(t, p18, 'r.');
+hold on
+plot(t, f18, 'b.');
+legend('parasites', 'food');
+title({'Localised Food with Parasite Placement at 10%'; 'Random Food Reproduction'});
 

@@ -115,7 +115,7 @@ file_name = 'case29_simulation.avi';
 [p29, f29] = simulation_case_1(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_threshold, food_death_threshold, file_name, make_video);
 %% Results
 % Equilibrium
-t = 1:1:steps;
+t = 1:1:size(p29, 2);
 figure;
 plot(t, p29, 'r.');
 hold on
