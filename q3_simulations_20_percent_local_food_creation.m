@@ -17,9 +17,9 @@ file_name = 'case7_simulation.avi';
 % Parasites - Extinct
 t = 1:1:size(p7, 1);
 figure;
-plot(t, p7, 'r.');
+plot(t, p7, 'r');
 hold on
-plot(t, f7, 'b.');
+plot(t, f7, 'b');
 legend('parasites', 'food');
 title({'Random Food with Parasite Placement at 20%'; 'Localised Food Reproduction'});
 
@@ -45,7 +45,7 @@ make_video = true;
 grid_width = 200;
 density = 0.2;
 [mask, parasites, food] = food_parasite_random_placement(density, grid_width);
-steps = 500;
+steps = 250;
 parasite_max_age = 8;
 food_creation_threshold = 0.50;
 food_death_threshold = 0.15;
@@ -57,9 +57,9 @@ file_name = 'case9_simulation.avi';
 % Equilibrium
 t = 1:1:steps;
 figure;
-plot(t, p9, 'r.');
+plot(t, p9, 'r');
 hold on
-plot(t, f9, 'b.');
+plot(t, f9, 'b');
 legend('parasites', 'food');
 title({'Random Food and Parasite Placement at 20%'; 'Localised Food Reproduction'});
 
@@ -108,9 +108,9 @@ file_name = 'case12_simulation.avi';
 % Equilibrium
 t = 1:1:size(p12,2);
 figure;
-plot(t, p12, 'r.');
+plot(t, p12, 'r');
 hold on
-plot(t, f12, 'b.');
+plot(t, f12, 'b');
 legend('parasites', 'food');
 title({'Localised Food with Parasite Placement at 20%'; 'Localised Food Reproduction'});
 

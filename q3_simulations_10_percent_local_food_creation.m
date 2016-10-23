@@ -40,7 +40,7 @@ file_name = 'case2_simulation.avi';
 
 %% Results
 % Equilibrium
-t = 1:1:steps;
+t = 1:1:size(p2, 2);
 figure;
 plot(t, p2, 'r');
 hold on
