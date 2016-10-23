@@ -11,7 +11,7 @@ food_death_threshold = 0.50;
 file_name = 'case19_simulation.avi';
 
 [p19, f19] = simulation_case_2(mask, parasites, food, steps, grid_width, parasite_max_age, food_creation_num, food_death_threshold, file_name, make_video);
-
+ 
 %% Results
 % Food - Extinct (almost)
 % But f3 food elements are always created at each iteration so they never
