@@ -14,7 +14,7 @@ file_name = 'case13_simulation.avi';
 
 %% Results
 % Food - Can never go Extinct
-% Parasites - Nearly Go extinct
+% Parasites - Live
 
 
 %% Case 14: Random F and P placements with Food created in random locations
@@ -24,7 +24,7 @@ grid_width = 200;
 density = 0.1;
 [mask, parasites, food] = food_parasite_random_placement(density, grid_width);
 steps = 1000;
-parasite_max_age = 100;
+parasite_max_age = 40;
 food_creation_num = 100;
 food_death_threshold = 0.02;
 file_name = 'case14_simulation.avi';
@@ -35,13 +35,13 @@ file_name = 'case14_simulation.avi';
 % Equilibrium
 t = 1:1:steps;
 figure;
-plot(t, p14, 'r.');
+plot(t, p14, 'r');
 hold on
-plot(t, f14, 'b.');
+plot(t, f14, 'b');
 legend('parasites', 'food');
 title({'Random Food with Parasite Placement at 10%'; 'Random Food Reproduction'});
 
-%% Case 15: Random F and P placements with Food created in neighbouring cells
+%% Case 15: Random F and P placements with Food created in random cells
 
 make_video = true;
 grid_width = 200;
@@ -59,7 +59,7 @@ file_name = 'case15_simulation.avi';
 % Food lives
 % Parasites dieout
 
-%% Case 16: Localised F placements with Food reproduced in neighbouring cells
+%% Case 16: Localised F placements with Food reproduced in random cells
 grid_width = 200;
 density = 0.1;
 [mask, parasites, food] = localised_food_random_parasite_placement(density, grid_width, 10);
@@ -75,7 +75,7 @@ file_name = 'case16_simulation.avi';
 % Not possible to simulate as a constant number of food particles are
 % created at each iteration
 
-%% Case 17: Localised F placements with Food reproduced in neighbouring cells
+%% Case 17: Localised F placements with Food reproduced in random cells
 grid_width = 200;
 density = 0.1;
 [mask, parasites, food] = localised_food_random_parasite_placement(density, grid_width, 10);
@@ -90,7 +90,7 @@ file_name = 'case17_simulation.avi';
 % Food - Lives
 % Parasites - Extinct
 
-%% Case 18: Localised F placements with Food reproduced in neighbouring cells
+%% Case 18: Localised F placements with Food reproduced in random cells
 grid_width = 200;
 density = 0.1;
 [mask, parasites, food] = localised_food_random_parasite_placement(density, grid_width, 10);

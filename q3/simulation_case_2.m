@@ -16,7 +16,9 @@ if make_video
 end
 
 for step = 1:steps
-    figure(f_id);
+    if make_video
+        figure(f_id);
+    end
     num_parasites = size(parasites, 1);
     
     % Parasite movement
@@ -114,21 +116,13 @@ for step = 1:steps
     end
     
     % reallocate matrices
-%     if mod(step, 2) == 0
     mask_of_live_parasites = parasites(:, 1) ~= -1;
     parasites = parasites(mask_of_live_parasites, :);
 
     mask_of_live_food = food(:, 1) ~= -1;
     food = food(mask_of_live_food, :);
          
-%     end
-    
-%     mask_parasites = parasites(:, 1) ~= -1;
-%     mask_food = food(:, 1) ~= -1;
-%     
-%     total_p = sum(mask_parasites);
-%     total_f = sum(mask_food);
-%     
+    % record population values
     pop_parasites(step) = length(parasites);
     pop_food(step) = length(food);
 end

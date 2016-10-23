@@ -24,7 +24,7 @@ density = 0.4;
 [mask, parasites, food] = food_parasite_random_placement(density, grid_width);
 steps = 500;
 parasite_max_age = 30;
-food_creation_num = 100;
+food_creation_num = 200;
 food_death_threshold = 0.02;
 file_name = 'case36_simulation.avi';
 
@@ -34,12 +34,12 @@ file_name = 'case36_simulation.avi';
 % Equilibrium
 t = 1:1:size(p36, 2);
 figure;
-plot(t, p36, 'r.');
+plot(t, p36, 'r');
 hold on
-plot(t, f36, 'b.');
+plot(t, f36, 'b');
 legend('parasites', 'food');
 title({'Random Food with Parasite Placement at 40%'; 'Random Food Reproduction'});
-%% Case 37: Random F and P placements with Food created in neighbouring cells
+%% Case 37: Random F and P placements with Food created in random cells
 
 make_video = true;
 grid_width = 200;
@@ -57,7 +57,7 @@ file_name = 'case37_simulation.avi';
 % Food - Lives
 % Parasites - Extinct
 
-%% Case 38: Localised F placements with Food reproduced in neighbouring cells
+%% Case 38: Localised F placements with Food reproduced in random cells
 grid_width = 200;
 density = 0.4;
 [mask, parasites, food] = localised_food_random_parasite_placement(density, grid_width, 10);
@@ -79,7 +79,7 @@ plot(t, f38, 'b.');
 legend('parasites', 'food');
 title({'Localised Food with Parasite Placement at 40%'; 'Random Food Reproduction'});
 
-%% Case 39: Localised F placements with Food reproduced in neighbouring cells
+%% Case 39: Localised F placements with Food reproduced in random cells
 grid_width = 200;
 density = 0.4;
 [mask, parasites, food] = localised_food_random_parasite_placement(density, grid_width, 10);

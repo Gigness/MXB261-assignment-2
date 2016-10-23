@@ -17,7 +17,9 @@ if make_video
 end
 
 for step = 1:steps
-    figure(f_id);
+    if make_video
+        figure(f_id);
+    end
     num_parasites = size(parasites, 1);
     
     % Parasite movement

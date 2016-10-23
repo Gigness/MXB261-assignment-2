@@ -22,6 +22,7 @@ hold on
 plot(t, f7, 'b.');
 legend('parasites', 'food');
 title({'Random Food with Parasite Placement at 20%'; 'Localised Food Reproduction'});
+
 %% Case 8: Random F and P placements with Food created in neighbouring cells
 
 grid_width = 200;
